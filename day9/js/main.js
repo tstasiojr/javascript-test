@@ -20,6 +20,7 @@ function api(endpoint = '', data) {
 const getUsersButton = document.querySelector('#getUsers');
 const sendUserNameInput = document.querySelector('#sendUserNameInput');
 const sendUserNameButton = document.querySelector('#sendUserButton');
+const userAgeInput = document.querySelector('#userAgeInput')
 
 sendUserButton.innerText = 'Send User';
 
@@ -31,13 +32,13 @@ getUsersButton.addEventListener( 'click', () => {
 
 sendUserButton.addEventListener( 'click', () => {
     const username = sendUserNameInput.value;
-    console.log(username)
+    const age = Number(userAgeInput.value);
 
-    if (!username) {
+    if (!username || !age) {
         return;
     }
 
     console.log('this wont happen unless there is a username', username);
 
-    api('users', JSON.stringify({user: username}) ).then( data => console.log('post', data));
+    api('users', JSON.stringify({user: { username, age } }) ).then( data => console.log('post', data));
 });
